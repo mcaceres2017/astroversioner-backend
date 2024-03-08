@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  db:
+    container_name: astroversioner_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: mcaceres2017
+      POSTGRES_PASSWORD: h4sh#t4g
+      POSTGRES_DB: astroversioner
+    ports:
+      - "0.0.0.0:5433:5433"
+    volumes:
+      - /home/matias/db:/var/lib/postgresql/data
+    command: -p 5433
+
+  astroversioner-service:
+    container_name: astroversioner_api
+    image: astroversioner
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./
+#      args:
+#        REMOTE_REPO_LINK: gdrive://1o-FagCnUq9Ip0_c8LGR36PylqM7h7zJb
+#    volumes: 
+#      - /home/usuario/Desktop/data-volume:/app/datasets
+    ports:
+      - "127.0.0.1:8003:8003"
